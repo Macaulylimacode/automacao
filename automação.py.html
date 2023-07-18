@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>automação.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d55fde; font-style: italic;}
+.s1 { color: #bbbbbb;}
+.s2 { color: #d19a66;}
+.s3 { color: #5c6370; font-style: italic;}
+.s4 { color: #89ca78;}
+.s5 { color: #2bbac5;}
+</style>
+</head>
+<body bgcolor="#282c34">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+automação.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">time</span>
+<span class="s0">import </span><span class="s1">pyautogui</span>
+<span class="s0">import </span><span class="s1">pyperclip</span>
+<span class="s0">import </span><span class="s1">pandas</span>
+<span class="s1">pyautogui.PAUSE = </span><span class="s2">2</span>
+<span class="s3"># PASSO 01: ENTRAR NO WINDOWS DIGITE GOOGLE E ENTRE</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;win&quot;</span><span class="s1">)</span>
+<span class="s1">pyautogui.write(</span><span class="s4">&quot;chrome&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">5</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;enter&quot;</span><span class="s1">)</span>
+<span class="s3"># PASSO 02: ESCOHER A CONTA DESEJADA</span>
+<span class="s1">time.sleep(</span><span class="s2">8</span><span class="s1">)</span>
+<span class="s1">pyautogui.write(</span><span class="s4">&quot;https://mail.google.com/mail/u/0/#inbox&quot;</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;enter&quot;</span><span class="s1">)</span>
+<span class="s3"># PASSO 03 - CONVERTER EM TABELA</span>
+<span class="s1">tabela = pandas.read_excel(</span><span class="s4">r&quot;C:\Users\revely.macauly\Downloads\tabela.xlsx&quot;</span><span class="s1">)</span>
+<span class="s1">print(tabela)</span>
+<span class="s1">total_gasto = tabela[</span><span class="s4">&quot;ValorFinal&quot;</span><span class="s1">].sum()</span>
+<span class="s1">quantidade = tabela[</span><span class="s4">&quot;QD&quot;</span><span class="s1">].sum()</span>
+<span class="s1">preço_médio = total_gasto / quantidade</span>
+<span class="s1">print(total_gasto)</span>
+<span class="s1">print(quantidade)</span>
+<span class="s1">print(preço_médio)</span>
+<span class="s1">time.sleep(</span><span class="s2">6</span><span class="s1">)</span>
+<span class="s3"># PASSO 04 - ENVIAR E-MAIL</span>
+<span class="s1">time.sleep(</span><span class="s2">3</span><span class="s1">)</span>
+<span class="s1">pyautogui.click(x=</span><span class="s2">101</span><span class="s1">, y=</span><span class="s2">156</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">6</span><span class="s1">)</span>
+<span class="s1">pyautogui.write(</span><span class="s4">&quot;macaulylima@icloud.com&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">1.5</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;tab&quot;</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;tab&quot;</span><span class="s1">) </span><span class="s3"># para passar para o próximo campo</span>
+<span class="s3"># pyperclip.copy - serve para cópiar informações</span>
+<span class="s1">pyperclip.copy(</span><span class="s4">&quot;Projeto de automação&quot;</span><span class="s1">)</span>
+<span class="s1">pyautogui.hotkey(</span><span class="s4">&quot;ctrl&quot;</span><span class="s1">, </span><span class="s4">&quot;v&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">0.5</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;tab&quot;</span><span class="s1">)</span>
+<span class="s1">texto = </span><span class="s4">f&quot;&quot;&quot;O Centro de Operações de Segurança da Clavis (SOC) agrega e unifica os nossos principais </span>
+<span class="s4">serviços e soluções, fornecendo aos nossos clientes uma arquitetura de segurança adaptativa,</span>
+ <span class="s4">para identificação de ameaças, alinhada aos pilares de Governança, Risco e Compliance.</span>
+<span class="s4">O dados de gastos</span>
+<span class="s4">TOTAL GASTO: R$</span><span class="s5">{</span><span class="s1">total_gasto</span><span class="s5">:</span><span class="s4">.2f</span><span class="s5">}</span>
+<span class="s4">QUANTIDADE : R$</span><span class="s5">{</span><span class="s1">quantidade</span><span class="s5">}</span>
+<span class="s4">PREÇO MÉDIO: R$</span><span class="s5">{</span><span class="s1">preço_médio</span><span class="s5">:</span><span class="s4">,.2f</span><span class="s5">}</span><span class="s4">&quot;&quot;&quot;</span>
+<span class="s1">pyperclip.copy(texto)</span>
+<span class="s1">pyautogui.hotkey(</span><span class="s4">&quot;ctrl&quot;</span><span class="s1">, </span><span class="s4">&quot;v&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">1</span><span class="s1">)</span>
+<span class="s1">pyautogui.hotkey(</span><span class="s4">&quot;ctrl&quot;</span><span class="s1">, </span><span class="s4">&quot;enter&quot;</span><span class="s1">)</span>
+
+<span class="s3"># ABRIR NOVA ABA</span>
+<span class="s1">pyautogui.hotkey(</span><span class="s4">&quot;ctrl&quot;</span><span class="s1">, </span><span class="s4">&quot;t&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">1.5</span><span class="s1">)</span>
+<span class="s1">pyautogui.write(</span><span class="s4">&quot;https://www.linkbeneficios.com.br/&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">2</span><span class="s1">)</span>
+<span class="s1">pyautogui.press(</span><span class="s4">&quot;enter&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s2">2</span><span class="s1">)</span>
+<span class="s1">pyautogui.click(x=</span><span class="s2">1195</span><span class="s1">, y=</span><span class="s2">109</span><span class="s1">)</span>
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>
